@@ -1,7 +1,5 @@
 module.exports = {
-  // configure the code below with your username, password and mlab database information
- // database: 'mongodb+srv://admin:admin@cluster0-rkmn7.mongodb.net/test?retryWrites=true&w=majority',   //prod
- database: 'mongodb+srv://admin:admin@digifiletest1-o6t78.mongodb.net/test?retryWrites=true&w=majority',   //prod
+ database: 'mongodb://mikamocha:Mikamocha7@127.0.0.1:27017/digifile_doxs?authSource=digifile_doxs&w=1', 
   //database: 'mongodb://192.168.100.227/digifile',    //dev
   secret: 'yoursecret'
 }

@@ -92,5 +92,26 @@ router.post('/newEmpresa', async (req, res) => {
     res.json({status: 'EMPRESA CREADA'});
 });
 
+router.post('/newEmpresaSuperAdmin', async (req, res) => {
+    const { nombre, representante, direccion,email_empresarial,email_administrador,contrasena,numUsuarios } = req.body;
+    const newEmpresa = new Empresas({ nombre:req.body.nombre,
+         representante:req.body.representante, 
+         direccion:req.body.direccion,
+         ruc:req.body.ruc,
+         email_empresarial: req.body.email_empresarial,
+         email_administrador:req.body.email_administrador,
+         contrasena:req.body.contrasena,
+         mutlipleUsers:req.body.mutlipleUsers,
+         currentUsers:[],
+         numUsuarios:req.body.numUsuarios,
+         usuarios_activos:req.body.usuarios_activos,
+         license_begin:req.body.license_begin,
+         license_end:req.body.license_end,});
+ 
+    await newEmpresa.save();
+    //res.send("empresa registrado");
+    console.log(newEmpresa._id)
+    res.json({"_id": newEmpresa._id});
+});
 
 module.exports = router;

@@ -6,6 +6,7 @@ const multipart = require('connect-multiparty');
 const bodyParser = require('body-parser');
 const formidable = require('formidable');
 const Documentos = require('../models/documento');
+const credentials = require('../credentials.js');
 var fs = require('fs');
 const express = require('express'),
   path = require('path'),
@@ -35,7 +36,8 @@ router.post('/api/upload', multipartMiddleware, (req, res) => {
 
 router.post('/uploadBulkFile', multipartMiddleware, (req, res) => {
   var file = req.files
-  var ruta = "http://181.198.203.160:3000/" + file.file.path
+  // var ruta = "http://181.198.203.160:3000/" + file.file.path
+  var ruta = credentials.server + file.file.path
   res.json(ruta);
 
 });
@@ -72,26 +74,21 @@ let upload = multer({
 });
 
 router.post('/uploadFile', multipartMiddleware, (req, res, next) => {
-  // console.log("sss "+bodyParser.text([req]))
-  console.log(req)
-  console.log(req.files.uploads)
   var file = req.files.uploads
   console.log("files " + JSON.stringify(file))
   for (var i = 0; i < file.length; i++) {//para cuando sean varios documentos
     var pathy = file[i]
 
   }
-
   var sizeKb = 1024;
   var sizeMb = sizeKb * sizeKb;
   var sizeGb = sizeMb * sizeKb;
   var tamaño = pathy.size.length
-
   var nexto = pathy.path.substring(8, pathy.path.lenght);
 
   res.json({
     'message': 'File uploaded succesfully.',
-    'url': ' http://181.198.203.160:3000/' + pathy.path,
+    'url': credentials.server + pathy.path,
     'nameDefault': nexto,
     'size': parseInt(pathy.size / 1024)
 

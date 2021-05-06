@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const formidable = require('formidable');
 const Documentos = require('../models/documento');
 const credentials = require('../credentials.js');
+
 var fs = require('fs');
 const express = require('express'),
   path = require('path'),
@@ -75,7 +76,6 @@ let upload = multer({
 
 router.post('/uploadFile', multipartMiddleware, (req, res, next) => {
   var file = req.files.uploads
-  console.log("files " + JSON.stringify(file))
   for (var i = 0; i < file.length; i++) {//para cuando sean varios documentos
     var pathy = file[i]
 
@@ -85,7 +85,7 @@ router.post('/uploadFile', multipartMiddleware, (req, res, next) => {
   var sizeGb = sizeMb * sizeKb;
   var tamaño = pathy.size.length
   var nexto = pathy.path.substring(8, pathy.path.lenght);
-
+  console.log(credentials['server']+"here")
   res.json({
     'message': 'File uploaded succesfully.',
     'url': credentials.server + pathy.path,
